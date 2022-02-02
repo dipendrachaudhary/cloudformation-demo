@@ -1,0 +1,36 @@
+Description: Create EC2 Instance
+
+Parameters:
+  InstanceTypeParameter:
+    Description: Select Instance Type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - m1.small
+      - m1.large
+    Description: Enter t2.micro, m1.small or m1.large. Default is t2.micro
+
+Resources:
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceTypeParameter
+      ImageId: ami-06cffe063efe892ad
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs
+          Ref: AWS::Region
+
+Outputs:
+  InstanceAvi:
+    Value: !GetAtt Instance.AvailabilityZone
+    Description: Availibility Zone
+    Export:
+      Name: "AvailZone"
+
+  InstanceId:
+    Value: !Ref Instance
+    Description: Instance Information
+    Export:
+      Name: "Instance"

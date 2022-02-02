@@ -1,0 +1,30 @@
+Description: "ChangeSet"
+
+Parameters:
+  S3BucketName:
+    Description: Enter the S3 Bucket Name
+    Type: String
+
+Mappings:
+  EnvMap: #logical id
+    dev:
+      instanceType: "t2.large"
+      name: "dev"
+
+    qa:
+      instanceType: "t2.medium"
+      name: "qa"
+
+    prod:
+      instanceType: "t2.xlarge"
+      name: "prod"
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket

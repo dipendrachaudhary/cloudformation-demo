@@ -1,0 +1,19 @@
+Description: "Creates S3 Bucket"
+
+Parameters:
+  S3BucketName:
+    Description: Enter the S3 Bucket Name
+    Type: String
+    MinLength: 8
+    MaxLength: 10
+    AllowedPattern: "[A-Za-z]+"
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket

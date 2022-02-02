@@ -1,0 +1,10 @@
+Description: "Creates S3 Bucket"
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: test-cf-bucket-99
+
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
